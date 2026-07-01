@@ -36,7 +36,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     // Mengambil NIM dari dart-define untuk kebutuhan sorting. Default '0' jika tidak ada.
-    const String prodNim = String.fromEnvironment('PROD_NIM', defaultValue: '0');
+    const String prodNim = String.fromEnvironment('PROD_NIM', defaultValue: '20123067');
     
     // Mendapatkan digit terakhir
     int lastDigit = 0;
