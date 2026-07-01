@@ -10,7 +10,7 @@ import 'package:mobile_apps/presentation/blocs/article/article_state.dart';
 
 class MockGetArticles extends Mock implements GetArticles {}
 
-// Perlu mendaftarkan tipe fallback untuk NoParams agar any() bisa bekerja jika menggunakan typed any
+// Perlu mendaftarkan tipe fallback untuk NoParams agar any() bisa bekerja
 class FakeNoParams extends Fake implements NoParams {}
 
 void main() {
@@ -31,22 +31,24 @@ void main() {
   });
 
   group('ArticleBloc', () {
+    // Dummy Article sudah menyertakan field url yang baru
     final tArticle = Article(
       title: 'Title',
       description: 'Desc',
       urlToImage: 'Img',
       publishedAt: 'Date',
+      url: 'https://example.com',
     );
-    final tArticles = [tArticle];
+    final List<Article> tArticles = [tArticle];
 
     test('state awal harus ArticleInitial', () {
       expect(bloc.state, isA<ArticleInitial>());
     });
 
     test('harus memancarkan [ArticleLoading, ArticleLoaded] ketika data berhasil diambil', () async {
-      // arrange
+      // arrange — return type harus (Failure?, List<Article>?)
       when(() => mockGetArticles(any()))
-          .thenAnswer((_) async => (null, tArticles));
+          .thenAnswer((_) async => (null, tArticles) as (Failure?, List<Article>?));
 
       // assert later
       final expected = [
