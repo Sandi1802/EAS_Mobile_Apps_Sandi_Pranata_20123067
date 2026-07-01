@@ -11,6 +11,7 @@ class ArticleModel {
   late String description;
   late String urlToImage;
   late String publishedAt;
+  late String url; // URL ke artikel asli
 
   ArticleModel();
 
@@ -19,7 +20,8 @@ class ArticleModel {
       ..title = json['title'] ?? 'No Title'
       ..description = json['description'] ?? 'No Description'
       ..urlToImage = json['urlToImage'] ?? ''
-      ..publishedAt = json['publishedAt'] ?? '';
+      ..publishedAt = json['publishedAt'] ?? ''
+      ..url = json['url'] ?? '';
     return model;
   }
 
@@ -29,6 +31,7 @@ class ArticleModel {
       description: description,
       urlToImage: urlToImage,
       publishedAt: publishedAt,
+      url: url,
     );
   }
 }
