@@ -7,8 +7,9 @@ class DioClient {
   DioClient() {
     dio = Dio(
       BaseOptions(
-        // Kita menggunakan NewsAPI gratis sebagai contoh (bisa diganti sesuai kebutuhan)
-        baseUrl: 'https://newsapi.org/v2/',
+        // Menggunakan Mock API yang berformat persis seperti NewsAPI agar tidak perlu API Key
+        // Ini memastikan aplikasi berjalan 100% tanpa error 401 Unauthorized
+        baseUrl: 'https://saurav.tech/NewsAPI/',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
       ),
