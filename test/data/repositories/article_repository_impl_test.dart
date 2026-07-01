@@ -24,8 +24,18 @@ void main() {
   });
 
   group('ArticleRepositoryImpl', () {
-    final tArticleModel1 = ArticleModel()..title = 'A Title';
-    final tArticleModel2 = ArticleModel()..title = 'Z Title';
+    final tArticleModel1 = ArticleModel()
+      ..title = 'A Title'
+      ..description = 'Desc'
+      ..urlToImage = ''
+      ..publishedAt = ''
+      ..url = 'https://example.com/a';
+    final tArticleModel2 = ArticleModel()
+      ..title = 'Z Title'
+      ..description = 'Desc'
+      ..urlToImage = ''
+      ..publishedAt = ''
+      ..url = 'https://example.com/z';
     final tArticleModels = [tArticleModel2, tArticleModel1]; // Unsorted
 
     test('harus mengembalikan data dari remote dan menyimpannya ke local', () async {
