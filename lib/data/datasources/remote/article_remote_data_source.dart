@@ -14,9 +14,8 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
   @override
   Future<List<ArticleModel>> getArticles() async {
     try {
-      // Menggunakan API gratis NewsAPI. Endpoint top-headlines.
-      // API Key sebaiknya disembunyikan, namun untuk contoh diletakkan di sini.
-      final response = await dio.get('top-headlines?country=us&apiKey=YOUR_API_KEY');
+      // Mengambil data dari endpoint mock (bebas API key)
+      final response = await dio.get('top-headlines/category/technology/us.json');
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonList = response.data['articles'];
