@@ -1,0 +1,47 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build_and_test:
+    name: Build, Test, and Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.19.0' # Sesuaikan dengan versi SDK jika perlu
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Generate Isar and Code
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run Unit Tests
+        run: flutter test
+
+      - name: Build APK (Release - PROD Flavor)
+        # Menambahkan argumen dart-define untuk environment PROD
+        run: flutter build apk --release --dart-define=FLAVOR=prod --dart-define=PROD_NIM=20123067
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
